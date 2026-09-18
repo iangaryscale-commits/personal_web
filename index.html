@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>马俊羿 · 个人主页</title>
+<meta name="description" content="马俊羿的个人主页 —— 准前端工程师，2027 届，金陵科技学院计算机科学与技术。">
+<!-- 标签页图标：内联 SVG，免得浏览器去要 favicon.ico 报 404 -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20fill='%23f8f5ee'/%3E%3Ctext%20x='32'%20y='47'%20font-size='44'%20text-anchor='middle'%20font-family='Georgia,serif'%20fill='%231b1a17'%3E&amp;#39532;%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">跳到主要内容</a>
+
+<!-- ① 顶部导航 -->
+<header class="site-header" id="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top">马俊羿</a>
+    <nav class="nav" aria-label="主导航">
+      <ul class="nav-list">
+        <li><a class="nav-link" href="#education">教育背景</a></li>
+        <li><a class="nav-link" href="#projects">项目经历</a></li>
+        <li><a class="nav-link" href="#skills">技能</a></li>
+        <li><a class="nav-link" href="#contact">联系我</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ② 首屏 -->
+  <section class="hero" id="top">
+    <div class="wrap hero-inner">
+      <div class="hero-text">
+        <p class="kicker">Portfolio / 2027</p>
+        <h1 class="hero-name">马俊羿</h1>
+        <p class="hero-tagline">准前端工程师 · 2027 届 · 用 AI 三周做了 5 个上线项目</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">查看项目</a>
+          <a class="btn btn-ghost" href="#contact">联系我</a>
+        </div>
+      </div>
+      <div class="hero-avatar">
+        <!-- TODO: 换成真实头像 <img class="avatar" src="avatar.jpg" alt="马俊羿"> -->
+        <div class="avatar" role="img" aria-label="头像占位">马</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ③ 教育背景 -->
+  <section class="section" id="education">
+    <div class="wrap">
+      <header class="section-head">
+        <span class="section-num">01</span>
+        <h2 class="section-title">教育背景</h2>
+      </header>
+      <div class="edu-item">
+        <div>
+          <h3 class="edu-school">金陵科技学院</h3>
+          <p class="edu-major">计算机科学与技术 · 本科</p>
+          <!-- TODO: 补充主修课程 / 绩点 / 奖项，不需要可整行删除 -->
+          <p class="edu-note">主修课程：C 语言程序设计、数据结构、计算机网络、数据库原理</p>
+        </div>
+        <p class="edu-period">2027 届</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ 项目经历 -->
+  <section class="section" id="projects">
+    <div class="wrap">
+      <header class="section-head">
+        <span class="section-num">02</span>
+        <h2 class="section-title">项目经历</h2>
+      </header>
+      <div class="project-grid">
+
+        <article class="project-card">
+          <span class="project-index">01</span>
+          <h3 class="project-title">日程表</h3>
+          <!-- TODO: 替换为真实描述：解决了什么问题 + 你负责什么 -->
+          <p class="project-desc">一句话描述：这个项目解决了什么问题，你在其中做了什么。</p>
+          <!-- TODO: 替换为真实技术栈 -->
+          <ul class="tag-list">
+            <li class="tag">标签一</li>
+            <li class="tag">标签二</li>
+            <li class="tag">标签三</li>
+          </ul>
+        </article>
+
+        <article class="project-card">
+          <span class="project-index">02</span>
+          <h3 class="project-title">猜数字游戏</h3>
+          <p class="project-desc">一句话描述：这个项目解决了什么问题，你在其中做了什么。</p>
+          <ul class="tag-list">
+            <li class="tag">标签一</li>
+            <li class="tag">标签二</li>
+            <li class="tag">标签三</li>
+          </ul>
+        </article>
+
+        <article class="project-card">
+          <span class="project-index">03</span>
+          <h3 class="project-title">记账本</h3>
+          <p class="project-desc">一句话描述：这个项目解决了什么问题，你在其中做了什么。</p>
+          <ul class="tag-list">
+            <li class="tag">标签一</li>
+            <li class="tag">标签二</li>
+            <li class="tag">标签三</li>
+          </ul>
+        </article>
+
+      </div>
+      <!-- TODO: 定位里写的是「5 个上线项目」，另外 2 个确定后在这里再加卡片 -->
+    </div>
+  </section>
+
+  <!-- ⑤ 技能 -->
+  <section class="section" id="skills">
+    <div class="wrap">
+      <header class="section-head">
+        <span class="section-num">03</span>
+        <h2 class="section-title">技能</h2>
+      </header>
+      <!-- TODO: 技能标签可加到 10 个 -->
+      <ul class="skill-cloud">
+        <li class="skill">C 语言</li>
+        <li class="skill">Java</li>
+        <li class="skill">Linux</li>
+        <li class="skill">Git</li>
+        <li class="skill">AI 辅助开发</li>
+        <li class="skill">数据分析</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ⑥ 联系方式 -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <header class="section-head">
+        <span class="section-num">04</span>
+        <h2 class="section-title">联系方式</h2>
+      </header>
+      <ul class="contact-list">
+        <li class="contact-item">
+          <span class="contact-label">Email</span>
+          <a class="contact-link" href="mailto:1178146128@qq.com">1178146128@qq.com</a>
+        </li>
+        <li class="contact-item">
+          <span class="contact-label">GitHub</span>
+          <!-- TODO: 替换为真实 GitHub 地址与用户名 -->
+          <a class="contact-link" href="https://github.com/" target="_blank" rel="noopener">github.com/你的用户名</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>© 2026 马俊羿</p>
+    <p>HTML / CSS / JavaScript 手写</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
