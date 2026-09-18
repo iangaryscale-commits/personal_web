@@ -331,7 +331,7 @@ img.avatar { object-fit: cover; }
   gap: 28px;
 }
 
-/* 每张卡片是一栏：细线描边 + 顶部粗线，去掉白底和悬停位移 */
+/* 每张卡片是一栏：细线描边 + 顶部粗线 */
 .project-card {
   display: flex;
   flex-direction: column;
@@ -339,9 +339,15 @@ img.avatar { object-fit: cover; }
   padding: 24px 24px 22px;
   border: 1px solid var(--rule);
   border-top: 2px solid var(--ink);
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, transform 0.22s ease, box-shadow 0.22s ease;
 }
-.project-card:hover { border-color: var(--rule-strong); }
+/* 悬停：轻轻抬起 + 一层压得很低的阴影。
+   阴影横向不扩散、只往下压，抬起来才像纸片而不像网页组件 */
+.project-card:hover {
+  border-color: var(--rule-strong);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 30px -24px rgba(27, 26, 23, 0.5);
+}
 .project-card:hover .project-index { color: var(--accent); }
 
 .project-index {
@@ -397,14 +403,15 @@ img.avatar { object-fit: cover; }
   list-style: none;
 }
 
-/* 悬停反白，像印刷里的实地色块 */
+/* 胶囊形标签；悬停反白，像印刷里的实地色块 */
 .skill {
-  padding: 10px 22px;
+  padding: 10px 24px;
   font-family: var(--serif);
   font-size: var(--fs-lead);
   letter-spacing: 0.06em;
   color: var(--ink-soft);
   border: 1px solid var(--rule);
+  border-radius: 999px;
   transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 }
 .skill:hover {
@@ -520,4 +527,6 @@ main .section:last-child { border-bottom: 0; }
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
+  /* 关掉动效就不要再有位移，只留阴影表示悬停 */
+  .project-card:hover { transform: none; }
 }

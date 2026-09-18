@@ -39,16 +39,42 @@
     });
   }
 
+  // 视口被压成一条位于 50% 高度处的横线（见文件末尾的 rootMargin）：
+  // 哪个区块跨过这条线，哪个就是当前区块。
+  // 首屏（封面）不算区块，此时不高亮任何链接。
+  var onscreen = Object.create(null);
+
+  function syncActiveToScroll() {
+    if (spyLocked) return; // 刚点过锚点，先按点击的来
+    for (var i = 0; i < sections.length; i++) {
+      if (onscreen[sections[i].id]) {
+        setActive(sections[i].id);
+        return;
+      }
+    }
+    setActive(null);
+  }
+
   /* 手动点了锚点就听点击的：跳转动画期间不让滚动监听改写高亮。
-     页面快到结尾时几个区块挤在一屏里，只按滚动位置判断会指错，
-     所以点完之后锁一会儿，等滚动停下来再把控制权交回去。 */
+     页面快到底时几个区块挤在一屏里（点「技能」时「联系我」也在视野里），
+     只按滚动位置判断会指错，所以点完之后先锁一会儿。
+     锁的是「刚点的那一下」，不是「之后的所有滚动」——
+     用户一旦自己动手（滚轮 / 触摸 / 按键 / 拖滚动条），立刻交还控制权，
+     否则整个手势都会被吞掉，高亮会一直停在刚才点的那个区块上。 */
   var spyLocked = false;
   var lockTimer = null;
 
   function unlockSpy() {
     spyLocked = false;
-    lockTimer = null;
+    if (lockTimer) {
+      clearTimeout(lockTimer);
+      lockTimer = null;
+    }
   }
+
+  ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (type) {
+    window.addEventListener(type, unlockSpy, { passive: true });
+  });
 
   anchorLinks.forEach(function (link) {
     link.addEventListener('click', function () {
@@ -70,7 +96,7 @@
     }
     if (spyLocked) {
       clearTimeout(lockTimer);
-      lockTimer = setTimeout(unlockSpy, 160); // 停手 160ms 后解锁
+      lockTimer = setTimeout(unlockSpy, 160); // 滚动停下来就解锁
     }
     ticking = false;
   }
@@ -86,21 +112,6 @@
 
   // ---- 2) 哪个区块在视野中间，就高亮哪个导航链接 ----
   if (!('IntersectionObserver' in window) || !sections.length) return;
-
-  // rootMargin 把视口压成一条位于 50% 高度处的横线：
-  // 哪个区块跨过这条线，哪个就是当前区块；首屏（封面）不算区块，此时不高亮任何链接
-  var onscreen = Object.create(null);
-
-  function syncActiveToScroll() {
-    if (spyLocked) return; // 刚点过锚点，先按点击的来
-    for (var i = 0; i < sections.length; i++) {
-      if (onscreen[sections[i].id]) {
-        setActive(sections[i].id);
-        return;
-      }
-    }
-    setActive(null);
-  }
 
   var observer = new IntersectionObserver(
     function (entries) {
