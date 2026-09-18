@@ -76,6 +76,16 @@
     window.addEventListener(type, unlockSpy, { passive: true });
   });
 
+  /* 窄屏导航是横向可滑的，点到的项可能在可视区外，顺手把它带进视野。
+     block:'nearest' 保证只横向挪导航，不动页面的纵向位置 */
+  navLinks.forEach(function (link) {
+    link.addEventListener('click', function () {
+      if (link.scrollIntoView) {
+        link.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      }
+    });
+  });
+
   anchorLinks.forEach(function (link) {
     link.addEventListener('click', function () {
       var id = link.getAttribute('href').slice(1);

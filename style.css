@@ -140,6 +140,8 @@ a { color: inherit; }
   padding: 3px 0;
   font-size: var(--fs-nav);
   letter-spacing: 0.12em;
+  /* 菜单文字不许断行：窄屏放不下就横向滑，别把「教育背景」拆成两行 */
+  white-space: nowrap;
   color: var(--ink-soft);
   text-decoration: none;
   border-bottom: 2px solid transparent;
@@ -373,25 +375,6 @@ img.avatar { object-fit: cover; }
   text-wrap: pretty;
 }
 
-.tag-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: auto 0 0;
-  padding: 16px 0 0;
-  list-style: none;
-  border-top: 1px solid var(--rule);
-}
-
-.tag {
-  padding: 3px 10px;
-  font-size: var(--fs-meta);
-  letter-spacing: 0.1em;
-  white-space: nowrap;
-  color: var(--ink-soft);
-  border: 1px solid var(--rule);
-}
-
 /* ---------- ⑤ 技能（标签云） ---------- */
 
 .skill-cloud {
@@ -450,6 +433,8 @@ img.avatar { object-fit: cover; }
 .contact-link {
   font-family: var(--serif);
   font-size: var(--fs-h3);
+  /* 邮箱和网址是没有空格的长串，窄屏上允许从中间断行，别撑破版心 */
+  overflow-wrap: anywhere;
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-decoration-color: var(--rule-strong);
@@ -502,12 +487,20 @@ main .section:last-child { border-bottom: 0; }
 }
 
 @media (max-width: 560px) {
-  html { scroll-padding-top: calc(var(--header-h) + 44px); }
-
   .wrap { width: min(100% - 32px, var(--maxw)); }
 
-  .brand { font-size: 1.125rem; letter-spacing: 0.1em; }
-  .nav-list { gap: 4px 14px; }
+  /* 导航压成一行：放不下就在自己这行里横向滑，不再折成两行。
+     高度稳定了，锚点的让位距离也就能和桌面端用同一套算法 */
+  .header-inner { flex-wrap: nowrap; }
+  .brand { flex: none; font-size: 1.125rem; letter-spacing: 0.1em; }
+  .nav {
+    min-width: 0; /* 不加这句 flex 不让它收缩，滑不动 */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav-list { flex-wrap: nowrap; gap: 4px 18px; }
   .nav-link { font-size: var(--fs-note); letter-spacing: 0.06em; }
 
   /* 小屏把封面字号和导语收回来，但标题/正文的对比仍然保留 */
@@ -516,6 +509,13 @@ main .section:last-child { border-bottom: 0; }
   .btn { padding: 12px 24px; letter-spacing: 0.12em; }
 
   .project-grid { grid-template-columns: 1fr; }
+
+  /* 头像收小：手机上不该跟姓名抢画面，外环间距也跟着收一点 */
+  .avatar {
+    width: clamp(96px, 30vw, 128px);
+    font-size: 2.25rem;
+    outline-offset: 6px;
+  }
 
   .contact-link { font-size: 1.125rem; }
   .contact-label { width: 100%; }
